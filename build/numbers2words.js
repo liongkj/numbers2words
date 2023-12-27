@@ -1715,8 +1715,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     if (index === 0 && index + 1 < max && !numbers[T2W.TEN_INDEX] && (numbers[T2W.SINGLE_INDEX])) {
         hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
-    formatted = [hundred, ten, single, radix].filter(part => part.trim() !== '').join(' ').trim();
-    return formatted;
+    return [hundred, ten, single, radix].filter(part => part.trim() !== '').join(' ').trim();
 
 };
 
