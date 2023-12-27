@@ -68,7 +68,7 @@ T2W.VI_VN.prototype.translate = function (numbers) {
     }
 
     return words.filter(part => part.trim() !== '').join(" ").trim();
-}
+};
 
 
 /**
@@ -86,9 +86,6 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     var single = '';
 
     var radix = this._getRadix(numbers, index);
-    if (JSON.stringify(numbers) === "[1,0,0,1]") {
-        debugger
-    }
     // handle hundred index value
     if (numbers[T2W.HUNDRED_INDEX]) {
         var hundredValue = this._getOnes(numbers[T2W.HUNDRED_INDEX]);
@@ -113,7 +110,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     // handle tex index value after 2. etc. 20,21,22,23,24,25,26,27,28,29
     if (numbers[T2W.TEN_INDEX] >= 2) {
         ten = this._getTens(numbers[T2W.TEN_INDEX]);
-        radixidx = T2W.VI_VN.DICTIONARY["radix"].indexOf(radix)
+        radixidx = T2W.VI_VN.DICTIONARY.radix.indexOf(radix);
         if (numbers.length <= 2 && radixidx >= 1) {
             ten += " " + this._getOnes(numbers[T2W.SINGLE_INDEX]);
             // Use "mốt" in regular contexts
@@ -129,7 +126,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
 
 
     if (index === 0 && index + 1 < max && !numbers[T2W.TEN_INDEX] && (numbers[T2W.SINGLE_INDEX])) {
-        hundred = T2W.VI_VN.DICTIONARY.delimiters[1]
+        hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
     formatted = [hundred, ten, single, radix].filter(part => part.trim() !== '').join(' ').trim();
     // debugger

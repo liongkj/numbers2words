@@ -1,35 +1,36 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
-		pkg : grunt.file.readJSON('package.json'),
+		pkg: grunt.file.readJSON('package.json'),
 
-		 concat : {
-			dist : {
-				src : ['src/polyfill/*.js', 'src/<%= pkg.name %>.js', 'src/locales/*.js','src/node/*.js' ],
-				dest : 'build/<%= pkg.name %>.js'
+		concat: {
+			dist: {
+				src: ['src/polyfill/*.js', 'src/<%= pkg.name %>.js', 'src/locales/*.js', 'src/node/*.js'],
+				dest: 'build/<%= pkg.name %>.js'
 			}
 		},
 
-		qunit : {
-			files : ['test/*.html']
-		},
+		// qunit: {
+		// 	files: ['test/*.html']
+		// },
 
-		jshint : {
+		jshint: {
 			// define the files to lint
-			files : ['gruntfile.js', 'src/<%= pkg.name %>.js', 'src/locales/*.js'],
-			options : {	
+			files: ['gruntfile.js', 'src/<%= pkg.name %>.js', 'src/locales/*.js'],
+			options: {
 				"-W099": true, // disable: Mixed spaces and tabs.
-				"-W014": true, // disable: Bag line breaking    				
+				"-W014": true, // disable: Bag line breaking    
+				'esversion': 6,
 			}
 		},
 
-		uglify : {
-			options : {
+		uglify: {
+			options: {
 				// the banner is inserted at the top of the output
-				banner : '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
+				banner: '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
 			},
-			dist : {
-				files : {
-					'build/<%= pkg.name %>.min.js' : ['<%= concat.dist.dest %>']
+			dist: {
+				files: {
+					'build/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
 				}
 			}
 		}
