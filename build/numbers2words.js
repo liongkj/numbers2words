@@ -1697,7 +1697,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     // handle tex index value after 2. etc. 20,21,22,23,24,25,26,27,28,29
     if (numbers[T2W.TEN_INDEX] >= 2) {
         ten = this._getTens(numbers[T2W.TEN_INDEX]);
-        radixidx = T2W.VI_VN.DICTIONARY.radix.indexOf(radix);
+        let radixidx = T2W.VI_VN.DICTIONARY.radix.indexOf(radix);
         if (numbers.length <= 2 && radixidx >= 1) {
             ten += " " + this._getOnes(numbers[T2W.SINGLE_INDEX]);
             // Use "mốt" in regular contexts
