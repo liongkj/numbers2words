@@ -126,7 +126,7 @@ T2W.prototype.joinNonEmptyParts = function (word_list) {
 
 	for (var i = 0; i < word_list.length; i++) {
 		if (word_list[i] && word_list[i].trim() !== '') {
-			filteredword_list.push(word_list[i].trim());
+			filteredParts.push(word_list[i].trim());
 		}
 	}
 
