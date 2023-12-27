@@ -36,7 +36,7 @@ T2W.VI_VN.TOKEN_LENGTH = 3;
  * @constant
  * @type {number}
  */
-T2W.VI_VN.MAX_NUMBERS = 12;
+T2W.VI_VN.MAX_NUMBERS = 20;
 
 
 
@@ -129,7 +129,6 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
         hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
     formatted = [hundred, ten, single, radix].filter(part => part.trim() !== '').join(' ').trim();
-    // debugger
     return formatted;
 
 };
