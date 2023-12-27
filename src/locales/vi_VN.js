@@ -19,7 +19,7 @@ T2W.VI_VN.DICTIONARY = {
     teens: ["mười", "mười một", "mười hai", "mười ba", "mười bốn", "mười lăm", "mười sáu", "mười bảy", "mười tám", "mười chín"],
     tens: ["", "", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"],
     hundred: "trăm",
-    radix: ["", "nghìn", "triệu", "tỷ"], // Added "tỷ" for billion
+    radix: ["", "nghìn", "triệu", "tỷ",],
     delimiters: [" ", "lẻ"] // Space for general separation, "lẻ" for numbers like 101 (một trăm lẻ một)
 };
 
@@ -36,7 +36,7 @@ T2W.VI_VN.TOKEN_LENGTH = 3;
  * @constant
  * @type {number}
  */
-T2W.VI_VN.MAX_NUMBERS = 20;
+T2W.VI_VN.MAX_NUMBERS = 21;
 
 
 
@@ -190,7 +190,7 @@ T2W.VI_VN.prototype._getTeens = function (number) {
  */
 T2W.VI_VN.prototype._getRadix = function (numbers, index) {
     var radix = '';
-    if (index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
+    if (index > 0 && (index >= 2 || numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
         radix = T2W.VI_VN.DICTIONARY.radix[index];
     }
 

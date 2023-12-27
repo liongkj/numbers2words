@@ -662,7 +662,7 @@ T2W.DE_DE.prototype._getRadix = function( numbers, index ) {
  * en_US locale
  * @constructor
  */
-T2W.EN_US = function(){};
+T2W.EN_US = function () { };
 
 /**
  * Translator dictionary
@@ -670,13 +670,13 @@ T2W.EN_US = function(){};
  * @type {Object}
  */
 T2W.EN_US.DICTIONARY = {
-	zero		:"zero",
-	ones		:[ "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ],
-	teens		:[ "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" ],
-	tens		:[ "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" ],
-	hundred		:"hundred",
-	radix		:["", "thousand", "million"],
-	delimiters	:["-", "and"]
+	zero: "zero",
+	ones: ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"],
+	teens: ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
+	tens: ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+	hundred: "hundred",
+	radix: ["", "thousand", "million", "billion"],
+	delimiters: ["-", "and"]
 };
 
 /**
@@ -691,7 +691,7 @@ T2W.EN_US.TOKEN_LENGTH = 3;
  * @constant
  * @type {number}
  */
-T2W.EN_US.MAX_NUMBERS = 9;
+T2W.EN_US.MAX_NUMBERS = 21;
 
 /**
  * Translate numbers to words
@@ -700,27 +700,27 @@ T2W.EN_US.MAX_NUMBERS = 9;
  * @param {number} index
  * @return {string}
  */
-T2W.EN_US.prototype.translate = function( numbers ) {	
-	
+T2W.EN_US.prototype.translate = function (numbers) {
+
 	// Check max value	
-	if(numbers.length * T2W.EN_US.TOKEN_LENGTH > T2W.EN_US.MAX_NUMBERS){
+	if (numbers.length * T2W.EN_US.TOKEN_LENGTH > T2W.EN_US.MAX_NUMBERS) {
 		throw {
-			name : "Error",
-			message : "The length of numbers is longer than the maximum value(" + T2W.EN_US.MAX_NUMBERS + ")."		
-		};	
-	}		
-	
+			name: "Error",
+			message: "The length of numbers is longer than the maximum value(" + T2W.EN_US.MAX_NUMBERS + ")."
+		};
+	}
+
 	// Deal with zero value	
-	if(numbers[T2W.SINGLE_INDEX] === 0 && numbers.length === 1){
+	if (numbers[T2W.SINGLE_INDEX] === 0 && numbers.length === 1) {
 		return T2W.EN_US.DICTIONARY.zero;
 	}
-	
+
 	var words = [];
-	for(var idx = 0, max = numbers.length; idx < max; idx++){				
-		words.unshift( this._getTrio( this.tokenize( numbers[idx], 1 ), idx, max));	
+	for (var idx = 0, max = numbers.length; idx < max; idx++) {
+		words.unshift(this._getTrio(this.tokenize(numbers[idx], 1), idx, max));
 	}
-	
-	return words.join("");								
+
+	return words.join("");
 };
 
 /**
@@ -732,41 +732,41 @@ T2W.EN_US.prototype.translate = function( numbers ) {
  * @param {number} max - length of tokens
  * @return {string}
  */
-T2W.EN_US.prototype._getTrio = function( numbers, index, max){																				
+T2W.EN_US.prototype._getTrio = function (numbers, index, max) {
 	var hundred = '';
 	var ten = '';
 	var single = '';
 	var radix = this._getRadix(numbers, index);
-	
-	if(numbers[T2W.HUNDRED_INDEX]){
-		hundred = numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX] 
-			? this._getOnes( numbers[ T2W.HUNDRED_INDEX ] ) + " " + T2W.EN_US.DICTIONARY.hundred + ' ' + T2W.EN_US.DICTIONARY.delimiters[1] + ' '
-			: this._getOnes( numbers[ T2W.HUNDRED_INDEX ] ) + " " + T2W.EN_US.DICTIONARY.hundred;
+
+	if (numbers[T2W.HUNDRED_INDEX]) {
+		hundred = numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX]
+			? this._getOnes(numbers[T2W.HUNDRED_INDEX]) + " " + T2W.EN_US.DICTIONARY.hundred + ' ' + T2W.EN_US.DICTIONARY.delimiters[1] + ' '
+			: this._getOnes(numbers[T2W.HUNDRED_INDEX]) + " " + T2W.EN_US.DICTIONARY.hundred;
 	}
-	
-	if( numbers[ T2W.TEN_INDEX ] ){			
-		ten = this._getTeens( numbers[T2W.SINGLE_INDEX]);			
+
+	if (numbers[T2W.TEN_INDEX]) {
+		ten = this._getTeens(numbers[T2W.SINGLE_INDEX]);
 	}
-						
-	if( numbers[ T2W.TEN_INDEX ] >=2 ){
-		ten = numbers[T2W.SINGLE_INDEX] 
-			? this._getTens( numbers[T2W.TEN_INDEX]) + T2W.EN_US.DICTIONARY.delimiters[0] + this._getOnes( numbers[T2W.SINGLE_INDEX]) 
-			: this._getTens( numbers[T2W.TEN_INDEX]); 	
+
+	if (numbers[T2W.TEN_INDEX] >= 2) {
+		ten = numbers[T2W.SINGLE_INDEX]
+			? this._getTens(numbers[T2W.TEN_INDEX]) + T2W.EN_US.DICTIONARY.delimiters[0] + this._getOnes(numbers[T2W.SINGLE_INDEX])
+			: this._getTens(numbers[T2W.TEN_INDEX]);
 	}
-							
-	if( !numbers[ T2W.TEN_INDEX ] ){
-		single = this._getOnes( numbers[T2W.SINGLE_INDEX]);
+
+	if (!numbers[T2W.TEN_INDEX]) {
+		single = this._getOnes(numbers[T2W.SINGLE_INDEX]);
 	}
-				
-	if(index+1 < max && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX]) ){
+
+	if (index + 1 < max && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
 		hundred = ' ' + hundred;
 	}
-	
-	if( index === 0 && index+1 < max && !numbers[ T2W.HUNDRED_INDEX ] && (numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX] )){
-		hundred	 = ' ' + T2W.EN_US.DICTIONARY.delimiters[1] + ' ';		
+
+	if (index === 0 && index + 1 < max && !numbers[T2W.HUNDRED_INDEX] && (numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
+		hundred = ' ' + T2W.EN_US.DICTIONARY.delimiters[1] + ' ';
 	}
-								
-	return hundred + ten + single + radix;		
+
+	return hundred + ten + single + radix;
 };
 
 /**
@@ -777,8 +777,8 @@ T2W.EN_US.prototype._getTrio = function( numbers, index, max){
  * @param {number} index
  * @return {string}
  */
-T2W.EN_US.prototype._getOnes = function( number) {			
-	return T2W.EN_US.DICTIONARY.ones[ number ];			
+T2W.EN_US.prototype._getOnes = function (number) {
+	return T2W.EN_US.DICTIONARY.ones[number];
 };
 
 /**
@@ -788,8 +788,8 @@ T2W.EN_US.prototype._getOnes = function( number) {
  * @param {number} number
  * @return {string}
  */
-T2W.EN_US.prototype._getTens = function( number ) {		
-	return T2W.EN_US.DICTIONARY.tens[ number ];				
+T2W.EN_US.prototype._getTens = function (number) {
+	return T2W.EN_US.DICTIONARY.tens[number];
 };
 
 /**
@@ -799,8 +799,8 @@ T2W.EN_US.prototype._getTens = function( number ) {
  * @param {number} number
  * @return {string}
  */
-T2W.EN_US.prototype._getTeens = function(number ){
-	return T2W.EN_US.DICTIONARY.teens[ number ];
+T2W.EN_US.prototype._getTeens = function (number) {
+	return T2W.EN_US.DICTIONARY.teens[number];
 };
 
 /**
@@ -811,12 +811,12 @@ T2W.EN_US.prototype._getTeens = function(number ){
  * @param {number} index
  * @return {string}
  */
-T2W.EN_US.prototype._getRadix = function( numbers, index ) {		
+T2W.EN_US.prototype._getRadix = function (numbers, index) {
 	var radix = '';
-	if( index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])){	
-		radix = ' ' + T2W.EN_US.DICTIONARY.radix[ index ];			
+	if (index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
+		radix = ' ' + T2W.EN_US.DICTIONARY.radix[index];
 	}
-			
+
 	return radix;
 };
 
@@ -1616,7 +1616,7 @@ T2W.VI_VN.DICTIONARY = {
     teens: ["mười", "mười một", "mười hai", "mười ba", "mười bốn", "mười lăm", "mười sáu", "mười bảy", "mười tám", "mười chín"],
     tens: ["", "", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"],
     hundred: "trăm",
-    radix: ["", "nghìn", "triệu", "tỷ"], // Added "tỷ" for billion
+    radix: ["", "nghìn", "triệu", "tỷ",],
     delimiters: [" ", "lẻ"] // Space for general separation, "lẻ" for numbers like 101 (một trăm lẻ một)
 };
 
@@ -1633,7 +1633,7 @@ T2W.VI_VN.TOKEN_LENGTH = 3;
  * @constant
  * @type {number}
  */
-T2W.VI_VN.MAX_NUMBERS = 20;
+T2W.VI_VN.MAX_NUMBERS = 21;
 
 
 
@@ -1787,7 +1787,7 @@ T2W.VI_VN.prototype._getTeens = function (number) {
  */
 T2W.VI_VN.prototype._getRadix = function (numbers, index) {
     var radix = '';
-    if (index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
+    if (index > 0 && (index >= 2 || numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
         radix = T2W.VI_VN.DICTIONARY.radix[index];
     }
 
