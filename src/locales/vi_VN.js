@@ -67,9 +67,7 @@ T2W.VI_VN.prototype.translate = function (numbers) {
         words.unshift(this._getTrio(this.tokenize(numbers[idx], 1), idx, max));
     }
 
-    return words.filter(function (part) {
-        return part.trim() !== '';
-    }).join(" ").trim();
+    return this.joinNonEmptyParts(words)
 };
 
 
@@ -97,15 +95,11 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
 
         // Check if there are numbers in the tens or singles place
         if (!numbers[T2W.TEN_INDEX] && numbers[T2W.SINGLE_INDEX]) {
-            hundred = [hundredValue, hundredWord, delimiter].filter(function (part) {
-                return part.trim() !== '';
-            }).join(" ").trim();
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord, delimiter])
         }
         else {
             // hundred = hundredValue + " " + hundredWord + " ";
-            hundred = [hundredValue, hundredWord].filter(function (part) {
-                return part.trim() !== '';
-            }).join(" ").trim();
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord])
         }
     }
 
@@ -135,9 +129,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     if (index === 0 && index + 1 < max && !numbers[T2W.TEN_INDEX] && (numbers[T2W.SINGLE_INDEX])) {
         hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
-    return [hundred, ten, single, radix].filter(function (part) {
-        return part.trim() !== '';
-    }).join(" ").trim();
+    return this.joinNonEmptyParts([hundred, ten, single, radix])
 
 };
 
