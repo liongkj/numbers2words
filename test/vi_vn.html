@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+    <script type="text/javascript" src="../src/polyfill/polyfill.js"></script>
+    <script type="text/javascript" src="../src/numbers2words.js"></script>
+    <script type="text/javascript" src="../src/locales/vi_VN.js"></script>
+    <script>
+        window.onload = function () {
+            test("toWords", function () {
+                var translator = new T2W("VI_VN");
+
+                equal(translator.toWords(0), "không");
+                equal(translator.toWords(1), "một");
+                equal(translator.toWords(2), "hai");
+                equal(translator.toWords(10), "mười");
+                equal(translator.toWords(11), "mười một");
+                equal(translator.toWords(20), "hai mươi");
+                equal(translator.toWords(21), "hai mươi mốt");
+                equal(translator.toWords(100), "một trăm");
+                equal(translator.toWords(101), "một trăm lẻ một");
+                equal(translator.toWords(110), "một trăm mười");
+                equal(translator.toWords(111), "một trăm mười một");
+                equal(translator.toWords(1000), "một nghìn");
+                equal(translator.toWords(1001), "một nghìn lẻ một");
+                equal(translator.toWords(1010), "một nghìn mười");
+                equal(translator.toWords(1100), "một nghìn một trăm");
+                equal(translator.toWords(10000), "mười nghìn");
+                equal(translator.toWords(100000), "một trăm nghìn");
+                equal(translator.toWords(1000000), "một triệu");
+
+                equal(translator.toWords(5000), "năm nghìn");
+                equal(translator.toWords(11000), "mười một nghìn");
+                equal(translator.toWords(21000), "hai mươi một nghìn");
+                equal(translator.toWords(321000), "ba trăm hai mươi mốt nghìn");
+                equal(translator.toWords(4321000), "bốn triệu ba trăm hai mươi mốt nghìn");
+                equal(translator.toWords(54321000), "năm mươi bốn triệu ba trăm hai mươi mốt nghìn");
+                equal(translator.toWords(654321000), "sáu trăm năm mươi bốn triệu ba trăm hai mươi mốt nghìn");
+                equal(translator.toWords(7654321000), "bảy tỷ sáu trăm năm mươi bốn triệu ba trăm hai mươi mốt nghìn");
+
+
+            });
+        };// onload
+    </script>
+</head>
+
+<body>
+    <h1 id="qunit-header">VI_VN Locale</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">
+        test markup, will be hidden
+    </div>
+</body>
+
+</html>
