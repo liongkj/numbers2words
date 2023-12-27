@@ -19,7 +19,6 @@ module.exports = function (grunt) {
 			options: {
 				"-W099": true, // disable: Mixed spaces and tabs.
 				"-W014": true, // disable: Bag line breaking    
-				'esversion': 6,
 			}
 		},
 
