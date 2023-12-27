@@ -74,7 +74,7 @@ T2W.VI_VN.prototype.translate = function (numbers) {
 /**
  * Converts first three numbers to words.
  * @private
- * It solves exceptions in the English language.
+ * It solves exceptions in the Vietnamese language.
  * @param {Array} numbers
  * @param {number} index
  * @param {number} max - length of tokens
