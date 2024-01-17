@@ -15,7 +15,7 @@ T2W.EN_US.DICTIONARY = {
 	teens: ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
 	tens: ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
 	hundred: "hundred",
-	radix: ["", "thousand", "million", "billion"],
+	radix: ["", "thousand", "million", "billion", "trillion"],
 	delimiters: ["-", "and"]
 };
 
@@ -154,7 +154,7 @@ T2W.EN_US.prototype._getTeens = function (number) {
 T2W.EN_US.prototype._getRadix = function (numbers, index) {
 	var radix = '';
 	if (index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
-		radix = ' ' + T2W.EN_US.DICTIONARY.radix[index];
+		radix = ' ' + T2W.EN_US.DICTIONARY.radix[index] ? T2W.EN_US.DICTIONARY.radix.slice(-1) : '';
 	}
 
 	return radix;

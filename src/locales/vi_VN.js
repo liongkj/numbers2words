@@ -67,7 +67,7 @@ T2W.VI_VN.prototype.translate = function (numbers) {
         words.unshift(this._getTrio(this.tokenize(numbers[idx], 1), idx, max));
     }
 
-    return this.joinNonEmptyParts(words)
+    return this.joinNonEmptyParts(words);
 };
 
 
@@ -95,11 +95,11 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
 
         // Check if there are numbers in the tens or singles place
         if (!numbers[T2W.TEN_INDEX] && numbers[T2W.SINGLE_INDEX]) {
-            hundred = this.joinNonEmptyParts([hundredValue, hundredWord, delimiter])
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord, delimiter]);
         }
         else {
             // hundred = hundredValue + " " + hundredWord + " ";
-            hundred = this.joinNonEmptyParts([hundredValue, hundredWord])
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord]);
         }
     }
 
@@ -129,7 +129,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     if (index === 0 && index + 1 < max && !numbers[T2W.TEN_INDEX] && (numbers[T2W.SINGLE_INDEX])) {
         hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
-    return this.joinNonEmptyParts([hundred, ten, single, radix])
+    return this.joinNonEmptyParts([hundred, ten, single, radix]);
 
 };
 

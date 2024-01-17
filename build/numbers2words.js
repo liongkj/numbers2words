@@ -140,7 +140,7 @@ T2W.prototype.joinNonEmptyParts = function (word_list) {
 	}
 
 	return filteredParts.join(" ");
-}
+};
 
 /**
  * ar_AR locale
@@ -675,7 +675,7 @@ T2W.EN_US.DICTIONARY = {
 	teens: ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
 	tens: ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
 	hundred: "hundred",
-	radix: ["", "thousand", "million", "billion"],
+	radix: ["", "thousand", "million", "billion", "trillion"],
 	delimiters: ["-", "and"]
 };
 
@@ -814,7 +814,7 @@ T2W.EN_US.prototype._getTeens = function (number) {
 T2W.EN_US.prototype._getRadix = function (numbers, index) {
 	var radix = '';
 	if (index > 0 && (numbers[T2W.HUNDRED_INDEX] || numbers[T2W.TEN_INDEX] || numbers[T2W.SINGLE_INDEX])) {
-		radix = ' ' + T2W.EN_US.DICTIONARY.radix[index];
+		radix = ' ' + T2W.EN_US.DICTIONARY.radix[index] ? T2W.EN_US.DICTIONARY.radix.slice(-1) : '';
 	}
 
 	return radix;
@@ -1664,7 +1664,7 @@ T2W.VI_VN.prototype.translate = function (numbers) {
         words.unshift(this._getTrio(this.tokenize(numbers[idx], 1), idx, max));
     }
 
-    return this.joinNonEmptyParts(words)
+    return this.joinNonEmptyParts(words);
 };
 
 
@@ -1692,11 +1692,11 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
 
         // Check if there are numbers in the tens or singles place
         if (!numbers[T2W.TEN_INDEX] && numbers[T2W.SINGLE_INDEX]) {
-            hundred = this.joinNonEmptyParts([hundredValue, hundredWord, delimiter])
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord, delimiter]);
         }
         else {
             // hundred = hundredValue + " " + hundredWord + " ";
-            hundred = this.joinNonEmptyParts([hundredValue, hundredWord])
+            hundred = this.joinNonEmptyParts([hundredValue, hundredWord]);
         }
     }
 
@@ -1726,7 +1726,7 @@ T2W.VI_VN.prototype._getTrio = function (numbers, index, max) {
     if (index === 0 && index + 1 < max && !numbers[T2W.TEN_INDEX] && (numbers[T2W.SINGLE_INDEX])) {
         hundred = T2W.VI_VN.DICTIONARY.delimiters[1];
     }
-    return this.joinNonEmptyParts([hundred, ten, single, radix])
+    return this.joinNonEmptyParts([hundred, ten, single, radix]);
 
 };
 

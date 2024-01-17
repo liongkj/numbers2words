@@ -131,4 +131,4 @@ T2W.prototype.joinNonEmptyParts = function (word_list) {
 	}
 
 	return filteredParts.join(" ");
-}
+};
