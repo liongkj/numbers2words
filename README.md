@@ -4,8 +4,22 @@ It converts a numeric value to words.
 You can use it as [standalone js library](https://github.com/Kibo/numbers2words/tree/master/build) or as **Node module**. 
 
 ## Example
+
+```package.json
+dependencies:{
+ ...,
+    "numbers2words": "liongkj/numbers2words",
+...
+}
+
+```
+
 ```
 var T2W = require('numbers2words'); // import from node modules
+
+
+var T2W = require('numbers2words/build/numbers2words') // angular
+translator = new T2W('EN_US')
 
 var translator = new T2W("EN_US");
 // one thousand two hundred thirty-four
